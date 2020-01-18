@@ -2,7 +2,7 @@
 Surge:
 
 [Script]
-http-response https:\/\/api\.rr\.tv(\/user\/privilege\/list|\/ad\/getAll) script-path=15212816-F40B-48D1-94AA-2111249A94F9.js
+http-response https:\/\/api\.rr\.tv(\/user\/privilege\/list|\/ad\/getAll) script-path= https://raw.githubusercontent.com/LvGuChuJiu/SurgeScript/master/rrtv.js
 
 [MITM]
 hostname = *.rr.tv
