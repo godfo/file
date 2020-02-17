@@ -2,7 +2,7 @@
 /*
 Surge:
 [Script]
-http-response https:\/\/api\.rr\.tv(\/user\/privilege\/list|\/ad\/getAll) requires-body=1,max-size=0,script-path=https://raw.githubusercontent.com/HelSingV/file/master/Scripts/Surge/rrys.js
+http-response https:\/\/api\.rr\.tv(\/user\/privilege\/list|\/ad\/getAll) requires-body=1,max-size=0,script-path=https://raw.githubusercontent.com/HelSingV/file/master/Scripts/Surge/rrtv.js
 [MITM]
 hostname = *.rr.tv
 */
