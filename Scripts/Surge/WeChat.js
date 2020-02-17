@@ -1,6 +1,6 @@
 /*
 [Script]
-http-request ^https://mp\.weixin\.qq\.com/mp/getappmsgad script-path=https://Choler.github.io/Surge/Script/WeChat.js
+http-request ^https://mp\.weixin\.qq\.com/mp/getappmsgad script-path=https://raw.githubusercontent.com/HelSingV/file/master/Scripts/Surge/WeChat.js
 
 [MITM]
 hostname = mp.weixin.qq.com
