@@ -1,4 +1,4 @@
-et url = $request.url
+let url = $request.url
 
 function getParams(key) {
     let regex = new RegExp(`${key}=(\\d*?)&`)
