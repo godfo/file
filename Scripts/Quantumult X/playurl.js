@@ -1,1 +1,25 @@
-function init(){return isSurge=(()=>void 0!==this.$httpClient),isQuanX=(()=>void 0!==this.$task),isJSON=(e=>"object"==typeof JSON.parse(e)),getdata=(e=>isSurge()?$persistentStore.read(e):isQuanX()?$prefs.valueForKey(e):void 0),setdata=((e,t)=>isSurge()?$persistentStore.write(e,t):isQuanX()?$prefs.setValueForKey(e,t):void 0),msg=((e,t,i)=>{isSurge()&&$notification.post(e,t,i),isQuanX()&&$notify(e,t,i)}),log=(e=>console.log(e)),get=((e,t)=>{isSurge()&&$httpClient.get(e,t),isQuanX()&&(e.method="GET",$task.fetch(e).then(e=>t(null,{},e.body)))}),post=((e,t)=>{isSurge()&&$httpClient.post(e,t),isQuanX()&&(e.method="POST",$task.fetch(e).then(e=>t(null,{},e.body)))}),done=((e={})=>{$done(e)}),{isSurge:isSurge,isQuanX:isQuanX,isJSON:isJSON,msg:msg,log:log,getdata:getdata,setdata:setdata,get:get,post:post,done:done}}const chavy=init(),querystr=$request.url.split("?")[1],queryparams={};if(querystr)for(queryparam of querystr.split("&"))queryparams[queryparam.split("=")[0]]=queryparam.split("=")[1];const cid=queryparams.cid?queryparams.cid:"",ep_id=queryparams.ep_id?queryparams.ep_id:"",url=`https://bilibili.mlyx.workers.dev/?cid=${cid}&ep_id=${ep_id}`;chavy.get({url:url},(e,t,i)=>{try{let e=JSON.parse(i);0==e.code?(chavy.msg("bilibili","\u64ad\u653e\u65b9\u5f0f: \u5927\u4f1a\u5458","\u8bf4\u660e: \u83b7\u53d6\u8fde\u63a5\u4fe1\u606f"),chavy.done({body:i})):(chavy.msg("bilibili","\u64ad\u653e\u65b9\u5f0f: \u666e\u901a\u4f1a\u5458","\u8bf4\u660e: \u83b7\u53d6\u8fde\u63a5\u4fe1\u606f"),chavy.done())}catch(e){chavy.done()}});
+et url = $request.url
+
+function getParams(key) {
+    let regex = new RegExp(`${key}=(\\d*?)&`)
+    let tmp = regex.exec(url)
+    return tmp ? tmp[1] : null
+}
+
+let url = {
+        url: `https://bilibili.mlyx.workers.dev/?cid=${getParams('cid')}&ep_id=${getParams('ep_id')}` ,
+        method: 'GET',
+        headers: {Cookie: cookieVal}
+              }
+
+$task.fetch(url).then(response) => {
+    let data = response.body
+    if(response.statusCode == 404) {
+       $notify('获取播放链接失败', '使用原始链接', 'biliplus未收录此资源或服务器错误')
+        $done({})
+    }
+    else {
+        $notify('获取播放链接成功', '使用大会员链接', 'success')
+        $done({ body })
+    }
+})
